@@ -13,7 +13,7 @@ def needterms():
 def categories():
     return "broadcast"
 def shortDesc():
-    return "(外部源直播)进入频道，两个主播连麦360P800K,限制上行弱网500K+20%丢包+200msdelay，统计设备B侧的卡顿率和延时"
+    return "(外部源直播-观众)进入频道，两个主播连麦720P2400K，统计设备B侧的卡顿率和延时"
 def detailDesc():
     return "(直播)A B设备一直在同一个频道内，设置设备的上行丢包策略，通过log计算播放侧的卡顿率"
 def run():
@@ -36,29 +36,25 @@ def run():
     lib.ExeCmdCallBack(0, "setExternalVideoSource,true,false,true")
     lib.ExeCmdCallBack(0, "setChannelProfile,1")
     lib.ExeCmdCallBack(0, "setClientRole,1,nil")
-    lib.ExeCmdCallBack(0, "setVideoEncoderConfiguration,640,360,15,800,0")
+    lib.ExeCmdCallBack(0, "setVideoEncoderConfiguration,1280,720,15,2400,0")
     lib.ExeCmdCallBack(0, "enableVideo")
     lib.ExeCmdCallBack(0, "setupLocalVideo,2,-1")
-    lib.ExeCmdCallBack(0, "setupRemoteVideo,2,2,-1")
     Testchannelname = "Test"+str(random.random())
     lib.ExeCmdCallBack(0, "joinChannelByKey,nil,"+Testchannelname+",nil,1")
     
     lib.ExeCmdCallBack(1, "setChannelProfile,1")
-    lib.ExeCmdCallBack(1, "setClientRole,1,nil")
-    lib.ExeCmdCallBack(1, "setVideoEncoderConfiguration,640,360,15,800,0")
+    lib.ExeCmdCallBack(1, "setClientRole,2,nil")
     lib.ExeCmdCallBack(1, "enableVideo")
-    lib.ExeCmdCallBack(1, "setupLocalVideo,2,-1")
     lib.ExeCmdCallBack(1, "setupRemoteVideo,1,2,-1")
     lib.ExeCmdCallBack(1, "joinChannelByKey,nil,"+Testchannelname+",nil,2")
     time.sleep(2)
-    lib.ExeCmdCallBack(0, "impairNet,500 20 200")
 
     lib.ExeCmdCallBack(0, "SLEEP,180")
     
     lib.ExeCmdCallBack(0, "setExternalVideoSource,false,false,true")
     lib.ExeCmdCallBack(0, "leaveChannel")
     lib.ExeCmdCallBack(1, "leaveChannel")
-    lib.ExeCmdCallBack(0, "impairNet,0")
+
 
     lib.ExeCmdCallBack(0, "getFile")
     lib.ExeCmdCallBack(1, "getFile")
@@ -66,3 +62,6 @@ def run():
     lib.ExeCmdCallBack(1, "DELAY")
     
     return "4"
+
+
+
