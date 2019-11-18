@@ -47,8 +47,8 @@ def run():
     lib.ExeCmdCallBack(1, "enableVideo")
     lib.ExeCmdCallBack(1, "setupRemoteVideo,1,2,-1")
     lib.ExeCmdCallBack(1, "joinChannelByKey,nil,"+Testchannelname+",nil,2")
-    time.sleep(2)
-    lib.ExeCmdCallBack(1, "impairNet,0 20")
+    time.sleep(10)
+    lib.ExeCmdCallBack(0, "impairNet,0 20")
 
     lib.ExeCmdCallBack(0, "SLEEP,180")
     
