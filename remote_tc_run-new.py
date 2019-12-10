@@ -38,7 +38,7 @@ def run_tc_remote(ip_list = None, ulbw = None, ullr = None, uldelay = None, dlbw
             enable_nlc(dlbw = dlbw, dllr = dllr, dldelay = dldelay, ulbw = ulbw, ullr = ullr, uldelay = uldelay)
         else:
             #cmd = '/home/agora/anaconda2/bin/python /home/agora/remote_tc_ctrl/setNetworkByIpEx.py --iplist %s --ulbw %s --ullr %s --dlbw %s --dllr %s' % (ip_list, ulbw, ullr, dlbw, dllr)
-            cmd = '/home/agora/anaconda2/bin/python /home/agora/media_quality_test/network/tools/set_network_by_ip.py --ip_local %s --ulbw %s --ullr %s --uldelay %s --dlbw %s --dllr %s --dldelay %s' % (ip_list, ulbw, ullr, uldelay, dlbw, dllr, dldelay)
+            cmd = '/usr/bin/python /home/agora/media_quality_test/network_py3/tools/set_network_by_ip.py --ip_local %s --ulbw %s --ullr %s --uldelay %s --dlbw %s --dllr %s --dldelay %s' % (ip_list, ulbw, ullr, uldelay, dlbw, dllr, dldelay)
     
     if not nlc:
         return remote_execute_result(REMOTE_HOST, USER_NAME, PWD, cmd)
