@@ -10,7 +10,7 @@ SSH_PORT = 25552
 PWD = 'bestvoip'
 
 #networksetting =[None, None, None, None, None, None, None, None]
-networksetting =[0, 0, 0, 0, 0, 0, 0, 0]
+networksetting =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 def remote_execute_result(remote_ip, user, passwd, cmd):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -22,7 +22,7 @@ def remote_execute_result(remote_ip, user, passwd, cmd):
     ssh.close()
     return result
 
-def run_tc_remote(ip_list = None, ulbw = None, ullr = None, uldelay = None, dlbw = None, dllr = None, dldelay = None, clear = None, nlc = False):
+def run_tc_remote(ip_list = None, ulbw = None, ullr = None, uldelay = None, dlbw = None, dllr = None, dldelay = None, uljitter = None, dljitter = None, clear = None, nlc = False):
     if ip_list == None:
         return False
     
@@ -38,7 +38,7 @@ def run_tc_remote(ip_list = None, ulbw = None, ullr = None, uldelay = None, dlbw
             enable_nlc(dlbw = dlbw, dllr = dllr, dldelay = dldelay, ulbw = ulbw, ullr = ullr, uldelay = uldelay)
         else:
             #cmd = '/home/agora/anaconda2/bin/python /home/agora/remote_tc_ctrl/setNetworkByIpEx.py --iplist %s --ulbw %s --ullr %s --dlbw %s --dllr %s' % (ip_list, ulbw, ullr, dlbw, dllr)
-            cmd = '/usr/bin/python /home/agora/media_quality_test/network_py3/tools/set_network_by_ip.py --ip_local %s --ulbw %s --ullr %s --uldelay %s --dlbw %s --dllr %s --dldelay %s' % (ip_list, ulbw, ullr, uldelay, dlbw, dllr, dldelay)
+            cmd = '/usr/bin/python /home/agora/media_quality_test/network_py3/tools/set_network_by_ip.py --ip_local %s --ulbw %s --ullr %s --uldelay %s --dlbw %s --dllr %s --dldelay %s --uljitter %s --dljitter %s' % (ip_list, ulbw, ullr, uldelay, dlbw, dllr, dldelay, uljitter, dljitter)
     
     if not nlc:
         return remote_execute_result(REMOTE_HOST, USER_NAME, PWD, cmd)
@@ -51,4 +51,5 @@ if __name__ == '__main__':
 
 
     run_tc_remote(networksetting[0], networksetting[1], networksetting[2], networksetting[3],
-                  networksetting[4], networksetting[5], networksetting[6], networksetting[7], nlc = False)
+                  networksetting[4], networksetting[5], networksetting[6], networksetting[7],
+                  networksetting[8], networksetting[9], nlc = False)

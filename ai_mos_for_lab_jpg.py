@@ -70,8 +70,10 @@ if __name__ == '__main__':
         # load model
     base_model = models.vgg19(pretrained = False)
     model = IMOS(base_model)
-
-    state_dice = torch.load('epoch-234.pkl', map_location = device)
+    py_path = os.path.abspath(__file__)
+    pklpath = os.path.dirname(py_path) + '/epoch-234.pkl'
+    print(pklpath)
+    state_dice = torch.load(pklpath, map_location = device)
     new_dict = OrderedDict()
     for k, v in state_dice.items():
         if 'module.' in k:
@@ -108,6 +110,7 @@ if __name__ == '__main__':
 
     time.sleep(2)
     final_score = []
+    fileresult=''
     for parent, dirnames, filenames in os.walk(path, followlinks=True):
         for filename in filenames:
             if os.path.splitext(filename)[1] == '.jpg':
@@ -142,10 +145,11 @@ if __name__ == '__main__':
                         print(snaptime)
                         yuv = os.path.split(file_path)[0] + '.yuv'
                         #print(yuv)
-                        param = ' -i '+ file_path + ' -y'
-                        ff = FFmpeg(outputs={yuv: param})
-                        print(ff.cmd)
-                        ff.run()
+                        param = os.path.dirname(py_path)+'/ffmpeg -i '+ file_path + ' ' + yuv + ' -y'
+                        #ff = FFmpeg(outputs={yuv: param})
+                        print(param)
+                        os.system(param)
+                        #ff.run()
 
                         if yuv == None:
                             print("please set the input yuv!")
