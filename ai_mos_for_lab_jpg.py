@@ -70,8 +70,8 @@ if __name__ == '__main__':
         # load model
     base_model = models.vgg19(pretrained = False)
     model = IMOS(base_model)
-
-    state_dice = torch.load('epoch-234.pkl', map_location = device)
+    pkl_path = os.path.split(os.path.realpath(__file__))[0]
+    state_dice = torch.load(pkl_path + '/' + 'epoch-234.pkl', map_location = device)
     new_dict = OrderedDict()
     for k, v in state_dice.items():
         if 'module.' in k:
