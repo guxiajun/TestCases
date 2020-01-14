@@ -5,7 +5,7 @@ import sys
 #from nlc_ctrl import enable_nlc, disable_nlc
 
 USER_NAME = 'agora'
-REMOTE_HOST = '10.80.1.215'
+REMOTE_HOST = '10.82.0.242'
 SSH_PORT = 25552
 PWD = 'bestvoip'
 
