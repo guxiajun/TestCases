@@ -12,19 +12,30 @@ import sys
 import re
 
 def get_device(log_path):
-    device_info = open(log_path, 'r', encoding='unicode_escape')
-    line = device_info.read()
-    device = re.findall(r'device info.+?(\w+)', line)
-    device = ''.join(device)
-    return device
+    try:
+        device_info = open(log_path, 'r', encoding='ISO-8859-1')
+        line = device_info.read()
+        device = re.findall(r'device info.+?(\w+)/', line)
+
+        device = ''.join(device)
+        return device
+    except Exception as e:
+        print(e)
+        device = ''
+        return device
 
 
 def get_version(log_path):
-    version_info = open(log_path, 'r', encoding='unicode_escape')
-    line = version_info.read()
-    version = re.findall(r'SDK ver (.*?) build', line)
-    version = ''.join(version)
-    return version
+    try:
+        version_info = open(log_path, encoding='gbk')
+        line = version_info.read()
+        version = re.findall(r'SDK ver (.+?) build', line)
+        version = ''.join(version)
+        return version
+    except Exception as e:
+        print(e)
+        version = ''
+        return version
 
 '''class report_generator_stand_alone:
     def __init__(self, abs_log_path):
