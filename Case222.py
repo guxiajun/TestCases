@@ -22,10 +22,7 @@ def run():
     lib.ExeCmdCallBack(0, "impairNet,0")
     lib.ExeCmdCallBack(1, "impairNet,0")
 
-    lib.ExeCmdCallBack(0, "YUV,agora_1280_720_30.yuv,720,1280,15,0")
-
-    lib.ExeCmdCallBack(0, "setParameters,{\"rtc.log_filter\":32847}")
-    lib.ExeCmdCallBack(1, "setParameters,{\"rtc.log_filter\":32847}")
+    lib.ExeCmdCallBack(0, "Readyuv,agora_720_1280_30.yuv,720,1280,30,0")
 
     lib.ExeCmdCallBack(0, "setParameters,{\"rtc.log_size\":20000000}")
     lib.ExeCmdCallBack(1, "setParameters,{\"rtc.log_size\":20000000}")
